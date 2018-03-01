@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Modelos
 {
-    class Pessoa
+    public abstract class Pessoa      // pessoa é uma classe abstrata porque não pode criar um generico e sim como cliente, um fornecedor ou entrregador.
     {
         public int PessoaID { get; set; }
         public string Nome { get; set; }
