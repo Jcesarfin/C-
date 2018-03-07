@@ -55,8 +55,8 @@ namespace ConsoleView
                 switch (opcaoDigitada)
                 {
                     case OpcoesMenuPricipal.CadastrarCliente:
-                        CadastrarCliente();
-                        //ExibirDadosCliente();
+                        Cliente c = CadastrarCliente();
+                        ExibirDadosCliente(c);
                         break;
                     case OpcoesMenuPricipal.PesquisarCliente:
                         PesquisarCliente();
@@ -123,32 +123,28 @@ namespace ConsoleView
         }
 
 
-        private static Cliente ExibirDadosCliente()
+        private static void ExibirDadosCliente(Cliente cliente)
 
         {
-
-            Cliente exib = CadastrarCliente();
-
-            Console.Write(exib.Nome);
+            Console.Write("---DADOS CLIENTE---");
+            Console.WriteLine();                //pula linha
+            Console.Write(cliente.PessoaID);
+            Console.WriteLine();
+            Console.Write(cliente.Nome);
+            Console.WriteLine();
+            Console.Write(cliente.Cpf);
             Console.WriteLine();
 
-            Console.Write(exib.Cpf);
+            Console.Write("---ENDEREÇO---");
             Console.WriteLine();
-
-            Endereco end2 = new Endereco();
-
-            Console.Write(end2.Rua);
+            Console.Write(cliente._Endereco.Rua);
             Console.WriteLine();
-
-            Console.Write(end2.Numero);
+            Console.Write(cliente._Endereco.Numero);
             Console.WriteLine();
-
-            Console.Write(end2.Complemento); 
+            Console.Write(cliente._Endereco.Complemento);
+            
             Console.WriteLine();
-
-            exib._Endereco = end2;
-
-            return exib;
+            Console.WriteLine();
 
         }
 
