@@ -9,7 +9,7 @@ namespace ConsoleView
 {
     class Program
     {
-        enum OpcoesMenuPricipal
+        enum OpcoesMenuPricipal      //enumerador funciona como o case 1,2,... usado no switch
         {
             CadastrarCliente = 1,
             PesquisarCliente = 2,
@@ -47,7 +47,6 @@ namespace ConsoleView
         static void Main(string[] args)
         {
             OpcoesMenuPricipal opcaoDigitada = OpcoesMenuPricipal.Sair;
-
            
             do
             {
@@ -57,6 +56,7 @@ namespace ConsoleView
                 {
                     case OpcoesMenuPricipal.CadastrarCliente:
                         CadastrarCliente();
+                        //ExibirDadosCliente();
                         break;
                     case OpcoesMenuPricipal.PesquisarCliente:
                         PesquisarCliente();
@@ -78,6 +78,15 @@ namespace ConsoleView
 
             Menu();
             Console.ReadKey();
+
+
+           // List<Cliente> listaClientes = new List<Cliente>();
+           // Cliente cli = new Cliente();
+           // listaClientes.Add(cli); 
+
+
+            
+
         }
 
         private static Cliente CadastrarCliente()
@@ -95,7 +104,6 @@ namespace ConsoleView
 
             Endereco end = new Endereco();
 
-            Console.Write("Digite o Endereço:");
             Console.Write("Digite a Rua:"); ;
             end.Rua = Console.ReadLine();
             Console.WriteLine();
@@ -113,6 +121,39 @@ namespace ConsoleView
             return cli;
 
         }
+
+
+        private static Cliente ExibirDadosCliente()
+
+        {
+
+            Cliente exib = CadastrarCliente();
+
+            Console.Write(exib.Nome);
+            Console.WriteLine();
+
+            Console.Write(exib.Cpf);
+            Console.WriteLine();
+
+            Endereco end2 = new Endereco();
+
+            Console.Write(end2.Rua);
+            Console.WriteLine();
+
+            Console.Write(end2.Numero);
+            Console.WriteLine();
+
+            Console.Write(end2.Complemento); 
+            Console.WriteLine();
+
+            exib._Endereco = end2;
+
+            return exib;
+
+        }
+
+
+
 
         private static Cliente PesquisarCliente()
         {
