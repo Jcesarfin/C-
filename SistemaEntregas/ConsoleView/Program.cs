@@ -89,8 +89,8 @@ namespace ConsoleView
 
         }
 
-        private static Cliente CadastrarCliente()
-
+        private static Cliente CadastrarCliente()  // esta função cadastrarcliente deveria ir para o controller, porém em virtude do "Console" não é possivel migra-la
+                                                    //sera ajustada qdo do projeto em WPF
         {
             Cliente cli = new Cliente();
 

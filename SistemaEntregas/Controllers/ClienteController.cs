@@ -9,14 +9,9 @@ namespace Controllers
 {
     public class ClienteController
     {
-        
-        public List<Cliente> MeusClientes { get; set; }
 
-        //é necessário o Construtor para liberar espaço, cria o construtor coom "ctor" tab tab
-        public ClienteController()
-        {
-            MeusClientes = new List<Cliente>();
-        }
+        public static List<Cliente> MeusClientes = new List<Cliente>();
+        
         
         public void SalvarCliente(Cliente cliente)
         {
