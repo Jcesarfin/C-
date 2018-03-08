@@ -1,4 +1,5 @@
-﻿using Modelos;
+﻿using Controllers;
+using Modelos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace ConsoleView
 {
     class Program
     {
-        enum OpcoesMenuPricipal      //enumerador funciona como o case 1,2,... usado no switch
+        enum OpcoesMenuPricipal      //enumerador funciona como o case 1,2,... usado em conjunto no switch
         {
             CadastrarCliente = 1,
             PesquisarCliente = 2,
@@ -30,10 +31,11 @@ namespace ConsoleView
             Console.WriteLine("1 - Cadastrar Novo");
             Console.WriteLine("2 - Pesquisar Cliente");
             Console.WriteLine("3 - Editar Cliente");
+            Console.WriteLine("4 - Excluir Cliente");
 
             Console.WriteLine("- Geral -");
-            Console.WriteLine("4 - Limpar Tela");
-            Console.WriteLine("5 - Sair da Tela");            
+            Console.WriteLine("5 - Limpar Tela");
+            Console.WriteLine("6 - Sair da Tela");            
             
             
             string opcao = Console.ReadLine();
@@ -56,6 +58,11 @@ namespace ConsoleView
                 {
                     case OpcoesMenuPricipal.CadastrarCliente:
                         Cliente c = CadastrarCliente();
+
+                        ClienteController cc = new ClienteController();
+                        cc.SalvarCliente(c);
+
+
                         ExibirDadosCliente(c);
                         break;
                     case OpcoesMenuPricipal.PesquisarCliente:
@@ -77,14 +84,7 @@ namespace ConsoleView
 
 
             Menu();
-            Console.ReadKey();
-
-
-           // List<Cliente> listaClientes = new List<Cliente>();
-           // Cliente cli = new Cliente();
-           // listaClientes.Add(cli); 
-
-
+            Console.ReadKey();       
             
 
         }
