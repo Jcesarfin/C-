@@ -58,19 +58,18 @@ namespace ConsoleView
                 {
                     case OpcoesMenuPricipal.CadastrarCliente:
                         Cliente c = CadastrarCliente();
-
                         ClienteController cc = new ClienteController();
                         cc.SalvarCliente(c);
-
-
                         ExibirDadosCliente(c);
                         break;
                     case OpcoesMenuPricipal.PesquisarCliente:
                         PesquisarCliente();
                         break;
                     case OpcoesMenuPricipal.EditarCliente:
+                        
                         break;
                     case OpcoesMenuPricipal.ExclucirCliente:
+                        ExcluirCliente();
                         break;
                     case OpcoesMenuPricipal.LimparTela:
                         break;
@@ -148,15 +147,35 @@ namespace ConsoleView
 
         }
 
-
-
-
-        private static Cliente PesquisarCliente()
+        private static void ExcluirCliente()
         {
-            return new Cliente();
+            Console.WriteLine("Digite o id do cliente que deseja excluir:");
+            int idCliente = int.Parse(Console.ReadLine());
+
+            ClienteController cc = new ClienteController();
+            cc.ExcluirCliente(idCliente);
+
+           
         }
 
 
+        private static void PesquisarCliente()
+        {
+            Console.Write("Digite o nome do cliente:");
+            string nomeCliente = Console.ReadLine();
+
+            ClienteController cc = new ClienteController();
+            Cliente cli = cc.PesquisarPorNome(nomeCliente);
+
+
+            if (cli != null)
+                ExibirDadosCliente(cli);
+            else
+                Console.WriteLine(" * Cliente não encontrado");            
+          
+        }
+
+       
 
 
     }
