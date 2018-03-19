@@ -62,5 +62,21 @@ namespace Controllers
 
         }
 
+
+        public List <Cliente> ListarClientes()
+        {
+
+            return MeusClientes;
+
+        }
+
+        public void EditarCliente(int idCliente)
+        {
+                        
+            Cliente cli = PesquisarPorId(idCliente);
+
+            
+
+        }
     }
 }

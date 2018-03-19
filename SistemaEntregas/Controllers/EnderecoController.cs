@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Modelos
+namespace Controllers
 {
-    public class Entregador : Pessoa
+    public class EnderecoController
     {
-       
     }
 }
