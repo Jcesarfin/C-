@@ -1,0 +1,17 @@
+﻿<Window x:Class="MeuProjetoWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MeuProjetoWPF"
+        mc:Ignorable="d"
+        Title="Menu Principal" Height="350" Width="525" Topmost="True" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Button x:Name="cadastrar" Content="CADASTRAR CLIENTE" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="140" Click="cadastrar_Click"/>
+        <Button x:Name="pesquisar" Content="PESQUISAR CLIENTE" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="140" Click="pesquisar_Click"/>
+        <Button x:Name="listar" Content="LISTAR CLIENTE" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="140" Click="listar_Click"/>
+        <Button x:Name="editar" Content="EDITAR CLIENTE" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" Width="140"/>
+        <Button x:Name="button5" Content="EXCLUIR CLIENTE" HorizontalAlignment="Left" Margin="10,110,0,0" VerticalAlignment="Top" Width="140"/>
+
+    </Grid>
+</Window>

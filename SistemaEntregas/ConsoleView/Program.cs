@@ -15,22 +15,10 @@ namespace ConsoleView
             CadastrarCliente = 1,
             PesquisarCliente = 2,
             EditarCliente = 3,
-            ExclucirCliente = 4,
+            ExcluirCliente = 4,
             ListarCliente = 5,
 
-            CadastrarEntregador = 11,
-            PesquisarEntregador = 12,
-            EditarEntregador = 13,
-            ExclucirEntregador = 14,
-            ListarEntregador = 15,
-
-            CadastrarFornecedor = 21,
-            PesquisarFornecedor = 22,
-            EditarFornecedor = 23,
-            ExclucirFornecedor = 24,
-            ListarFornecedor = 25,
-
-
+                       
             LimparTela = 6,
             Sair = 7,
 
@@ -49,19 +37,7 @@ namespace ConsoleView
             Console.WriteLine("4 - Excluir Cliente");
             Console.WriteLine("5 - Listar Clientes");
             Console.WriteLine("");
-            Console.WriteLine(" - Entregador - ");
-            Console.WriteLine("11 - Cadastrar Entregador");
-            Console.WriteLine("12 - Pesquisar Entregador");
-            Console.WriteLine("13 - Editar Entregador");
-            Console.WriteLine("14 - Excluir Entregador");
-            Console.WriteLine("15 - Listar Entregador");
-            Console.WriteLine("");
-            Console.WriteLine(" - Fornecedor - ");
-            Console.WriteLine("21 - Cadastrar Fornecedor");
-            Console.WriteLine("22 - Pesquisar Fornecedor");
-            Console.WriteLine("23 - Editar Fornecedor");
-            Console.WriteLine("24 - Excluir Fornecedor");
-            Console.WriteLine("25 - Listar Fornecedor");
+            
 
             Console.WriteLine("");
             Console.WriteLine("- Geral -");
@@ -87,63 +63,25 @@ namespace ConsoleView
 
                 switch (opcaoDigitada)
                 {
-                    case OpcoesMenuPricipal.CadastrarCliente:
-                        Cliente c = CadastrarCliente();
+                    case OpcoesMenuPricipal.CadastrarCliente:                        
+                        Cliente c = CadastrarCliente();      
                         ClienteController cc = new ClienteController();
                         cc.SalvarCliente(c);
-                        ExibirDadosCliente(c);
+                        ExibirDadosCliente(c);                        
                         break;
                     case OpcoesMenuPricipal.PesquisarCliente:
                         PesquisarCliente();
                         break;
                     case OpcoesMenuPricipal.EditarCliente:
-                        EditarDadosClientes();
+                        EditarClientes();
                         break;
-                    case OpcoesMenuPricipal.ExclucirCliente:
+                    case OpcoesMenuPricipal.ExcluirCliente:
                         ExcluirCliente();
                         break;
                     case OpcoesMenuPricipal.ListarCliente:
                         ListarTodosClientes();
                         break;
-
-                    case OpcoesMenuPricipal.CadastrarEntregador:
-                        Entregador e = CadastrarEntregador();
-                        EntregadorController ee = new EntregadorController();
-                        ee.SalvarEntregador(e);
-                        ExibirDadosEntregador(e);
-                        break;
-                    case OpcoesMenuPricipal.PesquisarEntregador:
-                        PesquisarEntregador();
-                        break;
-                    case OpcoesMenuPricipal.EditarEntregador:
-                        EditarDadosEntregador();
-                        break;
-                    case OpcoesMenuPricipal.ExclucirEntregador:
-                        ExcluirEntregador();
-                        break;
-                    case OpcoesMenuPricipal.ListarEntregador:
-                        ListarTodosEntregadores();
-                        break;
-
-                    case OpcoesMenuPricipal.CadastrarFornecedor:
-                        Fornecedor f = CadastrarFornecedor();
-                        FornecedorController ff = new FornecedorController();
-                        ff.SalvarFornecedor(f);
-                        ExibirDadosFornecedor(f);
-                        break;
-                    case OpcoesMenuPricipal.PesquisarFornecedor:
-                        PesquisarFornecedor();
-                        break;
-                    case OpcoesMenuPricipal.EditarFornecedor:
-                        EditarDadosFornecedor();
-                        break;
-                    case OpcoesMenuPricipal.ExclucirFornecedor:
-                        ExcluirFornecedor();
-                        break;
-                    case OpcoesMenuPricipal.ListarFornecedor:
-                        ListarTodosFornecedores();
-                        break;
-
+                    
                     case OpcoesMenuPricipal.LimparTela:
                         break;
                     case OpcoesMenuPricipal.Sair:
@@ -161,6 +99,8 @@ namespace ConsoleView
 
         }
 
+        // OK
+
         private static Cliente CadastrarCliente()  // esta função cadastrarcliente deveria ir para o controller, porém em virtude do "Console" não é possivel migra-la
                                                     //sera ajustada qdo do projeto em WPF
         {
@@ -174,27 +114,15 @@ namespace ConsoleView
             cli.Cpf = Console.ReadLine();
             Console.WriteLine();
 
-            Endereco end = new Endereco();
+            Endereco end = CadastrarEndereco();
 
-            Console.Write("Digite a Rua:"); ;
-            end.Rua = Console.ReadLine();
-            Console.WriteLine();
-
-            Console.Write("Digite o Número:"); ;
-            end.Numero = int.Parse(Console.ReadLine());
-            Console.WriteLine();
-
-            Console.Write("Digite o Complemento:"); ;
-            end.Complemento = Console.ReadLine();
-            Console.WriteLine();
-
-            cli._Endereco = end;
-
+            cli.EnderecoID = end.EnderecoID;
+            
             return cli;
 
         }
 
-
+        // OK
         private static void ExibirDadosCliente(Cliente cliente)
 
         {
@@ -207,31 +135,28 @@ namespace ConsoleView
             Console.Write(cliente.Cpf);
             Console.WriteLine();
 
-            Console.Write("---ENDEREÇO---");
-            Console.WriteLine();
-            Console.Write(cliente._Endereco.Rua);
-            Console.WriteLine();
-            Console.Write(cliente._Endereco.Numero);
-            Console.WriteLine();
-            Console.Write(cliente._Endereco.Complemento);
+            ExibirDadosEndereco(cliente.EnderecoID);
             
+
             Console.WriteLine();
             Console.WriteLine();
 
         }
 
+
+        // OK
         private static void ExcluirCliente()
         {
             Console.WriteLine("Digite o id do cliente que deseja excluir:");
             int idCliente = int.Parse(Console.ReadLine());
 
             ClienteController cc = new ClienteController();
-            cc.ExcluirCliente(idCliente);
+            cc.ExcluirCliente(idCliente);               
 
-           
+
         }
 
-
+        // OK
         private static void PesquisarCliente()
         {
             Console.Write("Digite o nome do cliente:");
@@ -248,6 +173,7 @@ namespace ConsoleView
           
         }
 
+        // OK
         private static void ListarTodosClientes()
         {
 
@@ -272,268 +198,126 @@ namespace ConsoleView
             }
         }
 
-        private static void EditarDadosClientes()
+
+        // Ver dados cliente
+
+        // OK
+        private static void EditarClientes()
         {
             Console.WriteLine();
             Console.Write(" --- Editar os dados do Cliente --- ");
-            Console.WriteLine();
 
-            ClienteController cc = new ClienteController();
-           // cc.EditarCliente(p)
-
-
-
-
-        }
-
-
-        private static Entregador CadastrarEntregador()  
-                                                   
-        {
-            Entregador entre = new Entregador();
-
-            Console.Write("Digite o nome:");
-            entre.Nome = Console.ReadLine();
-            Console.WriteLine();
-
-            Console.Write("Digite o CPF:");
-            entre.Cpf = Console.ReadLine();
-            Console.WriteLine();
-
-            Endereco end = new Endereco();
-
-            Console.Write("Digite a Rua:"); ;
-            end.Rua = Console.ReadLine();
-            Console.WriteLine();
-
-            Console.Write("Digite o Número:"); ;
-            end.Numero = int.Parse(Console.ReadLine());
-            Console.WriteLine();
-
-            Console.Write("Digite o Complemento:"); ;
-            end.Complemento = Console.ReadLine();
-            Console.WriteLine();
-
-            entre._Endereco = end;
-
-            return entre;
-
-        }
-
-
-        private static void ExibirDadosEntregador(Entregador entregador)
-
-        {
-            Console.Write("---DADOS ENTREGADOR---");
-            Console.WriteLine();                //pula linha
-            Console.Write(entregador.PessoaID);
-            Console.WriteLine();
-            Console.Write(entregador.Nome);
-            Console.WriteLine();
-            Console.Write(entregador.Cpf);
-            Console.WriteLine();
-
-            Console.Write("---ENDEREÇO---");
-            Console.WriteLine();
-            Console.Write(entregador._Endereco.Rua);
-            Console.WriteLine();
-            Console.Write(entregador._Endereco.Numero);
-            Console.WriteLine();
-            Console.Write(entregador._Endereco.Complemento);
-
-            Console.WriteLine();
-            Console.WriteLine();
-
-        }
-
-        private static void ExcluirEntregador()
-        {
-            Console.WriteLine("Digite o id do entregador que deseja excluir:");
-            int idEntregador = int.Parse(Console.ReadLine());
-
-            EntregadorController ee = new EntregadorController();
-            ee.ExcluirEntregador(idEntregador);
-
-
-        }
-
-
-        private static void PesquisarEntregador()
-        {
-            Console.Write("Digite o nome do entregador:");
-            string nomeEntregador = Console.ReadLine();
-
-            EntregadorController ee = new EntregadorController();
-            Entregador entre = ee.PesquisarEntregadorPorNome(nomeEntregador);
-
-
-            if (entre != null)
-                ExibirDadosEntregador(entre);
-            else
-                Console.WriteLine(" * Entregador não encontrado");
-
-        }
-
-        private static void ListarTodosEntregadores()
-        {
-
-            Console.WriteLine();
-            Console.Write(" --- Entregadores cadastrados --- ");
-            Console.WriteLine();
-
-            EntregadorController ee = new EntregadorController();
-            List<Entregador> lista = ee.ListarEntregador();
-
-            if (lista.Count == 0)
-            {
-                Console.WriteLine(" * Ainda não há Entrregadores cadastrados ");
-            }
-            else
-            {
-
-                foreach (Entregador entre in lista)
-                {
-                    ExibirDadosEntregador(entre);
-                }
-                Console.WriteLine();
-            }
-        }
-
-        private static void EditarDadosEntregador()
-        {
-            Console.WriteLine();
-            Console.Write(" --- Editar os dados do Cliente --- ");
-            Console.WriteLine();
-
-            EntregadorController cc = new EntregadorController();
-            //cc.EditarEntregador(p)
+            int idCliente;
+            ListarTodosClientes();            
 
             
+            Console.WriteLine();
+            Console.Write(" Digite o ID do Cliente --- ");
+            Console.WriteLine();
+
+            idCliente = int.Parse(Console.ReadLine());
+            ClienteController cc = new ClienteController();
+
+            Cliente cli = new Cliente();
+
+            
+            
+                Console.WriteLine("Digite o nome desejado");
+                cli.Nome = Console.ReadLine();
+
+                Console.WriteLine("Digite o cpf desejado");
+                cli.Cpf = Console.ReadLine();
+
+                Endereco e = AlterarEndereco(cli.EnderecoID);
+
+                cc.EditarCliente(idCliente, cli);
+
+                
+                if (cli != null)
+                {
+                    Console.WriteLine("Digite o nome desejado");
+                    cli.Nome = Console.ReadLine();
+
+                    Console.WriteLine("Digite o cpf desejado");
+                    cli.Cpf = Console.ReadLine();
+
+                    Endereco e = AlterarEndereco(cli.EnderecoID);
+                }
+                else
+                {
+                    Console.WriteLine("Cliente não encontrado");
+                }
+
+            }
+           
+       
+
+             // OK
+            private static Endereco AlterarEndereco (int id)
+            {
+            EnderecoController ec = new EnderecoController();
+            Endereco e = ec.PesquisarEnderecoPorId(id);
+
+            Console.WriteLine("Informe o nome da rua: ");
+            e.Rua = Console.ReadLine();
+
+            Console.WriteLine("Informe o número: ");
+            e.Numero = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Informe o complemento: ");
+            e.Complemento = Console.ReadLine();
+
+            return e;
+
         }
 
-        private static Fornecedor CadastrarFornecedor()
+        // OK
+        private static Endereco CadastrarEndereco()
 
         {
-            Fornecedor forne = new Fornecedor();
-
-            Console.Write("Digite o nome:");
-            forne.Nome = Console.ReadLine();
-            Console.WriteLine();
-
-            Console.Write("Digite o CPF:");
-            forne.Cpf = Console.ReadLine();
-            Console.WriteLine();
-
             Endereco end = new Endereco();
 
-            Console.Write("Digite a Rua:"); ;
+            Console.Write("Digite a Rua: ");
             end.Rua = Console.ReadLine();
             Console.WriteLine();
 
-            Console.Write("Digite o Número:"); ;
+            Console.Write("Digite o Número: ");
             end.Numero = int.Parse(Console.ReadLine());
             Console.WriteLine();
 
-            Console.Write("Digite o Complemento:"); ;
+            Console.Write("Digite o Complemento:");
             end.Complemento = Console.ReadLine();
             Console.WriteLine();
 
-            forne._Endereco = end;
-
-            return forne;
+            EnderecoController ec = new EnderecoController();
+            ec.SalvarEndereco(end);
+            return end;
 
         }
 
-
-        private static void ExibirDadosFornecedor(Fornecedor fornecedor)
+        // OK
+        private static void ExibirDadosEndereco(int ID)
 
         {
-            Console.Write("---DADOS FORNECEDOR---");
-            Console.WriteLine();                //pula linha
-            Console.Write(fornecedor.PessoaID);
-            Console.WriteLine();
-            Console.Write(fornecedor.Nome);
-            Console.WriteLine();
-            Console.Write(fornecedor.Cpf);
-            Console.WriteLine();
+            EnderecoController ec = new EnderecoController();
+            Endereco e = ec.PesquisarEnderecoPorId(ID);
+
 
             Console.Write("---ENDEREÇO---");
             Console.WriteLine();
-            Console.Write(fornecedor._Endereco.Rua);
+            Console.Write(e.Rua);
             Console.WriteLine();
-            Console.Write(fornecedor._Endereco.Numero);
+            Console.Write(e.Numero);
             Console.WriteLine();
-            Console.Write(fornecedor._Endereco.Complemento);
+            Console.Write(e.Complemento);
 
             Console.WriteLine();
             Console.WriteLine();
 
         }
 
-        private static void ExcluirFornecedor()
-        {
-            Console.WriteLine("Digite o id do fornecedor que deseja excluir:");
-            int idFornecedor = int.Parse(Console.ReadLine());
-
-            FornecedorController ff = new FornecedorController();
-            ff.ExcluirFornecedor(idFornecedor);
-
-
-        }
-
-
-        private static void PesquisarFornecedor()
-        {
-            Console.Write("Digite o nome do fornecedor:");
-            string nomeFornecedor = Console.ReadLine();
-
-            FornecedorController ff = new FornecedorController();
-            Fornecedor forne = ff.PesquisarFornecedorPorNome(nomeFornecedor);
-
-
-            if (forne != null)
-                ExibirDadosFornecedor(forne);
-            else
-                Console.WriteLine(" * Fornecedor não encontrado");
-
-        }
-
-        private static void ListarTodosFornecedores()
-        {
-
-            Console.WriteLine();
-            Console.Write(" --- Fornecedores cadastrados --- ");
-            Console.WriteLine();
-
-            FornecedorController ff = new FornecedorController();
-            List<Fornecedor> lista = ff.ListarFornecedor();
-
-            if (lista.Count == 0)
-            {
-                Console.WriteLine(" * Ainda não há Fornecedores cadastrados ");
-            }
-            else
-            {
-
-                foreach (Fornecedor forne in lista)
-                {
-                    ExibirDadosFornecedor(forne);
-                }
-                Console.WriteLine();
-            }
-        }
-
-        private static void EditarDadosFornecedor()
-        {
-            Console.WriteLine();
-            Console.Write(" --- Editar os dados do Fornecedor --- ");
-            Console.WriteLine();
-
-            FornecedorController cc = new FornecedorController();
-            //cc.EditarEntregador(p)
-
-
-        }
+         
+        
 
     }
 }

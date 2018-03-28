@@ -1,0 +1,38 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace MeuProjetoWPF
+{
+    /// <summary>
+    /// Lógica interna para Cadastro.xaml
+    /// </summary>
+    public partial class Cadastro : Window
+    {
+        public Cadastro()
+        {
+            InitializeComponent();
+        }
+
+        private void nome1_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtNome.Text))
+            {
+                btnSalvar.IsEnabled = true;
+
+            }else
+                btnSalvar.IsEnabled = false;
+        }
+
+    }
+}

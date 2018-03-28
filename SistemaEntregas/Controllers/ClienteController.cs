@@ -70,13 +70,16 @@ namespace Controllers
 
         }
 
-        public void EditarCliente(int idCliente)
+        public void EditarCliente(int idClienteEditar, Cliente clienteEditado)
         {
-                        
-            Cliente cli = PesquisarPorId(idCliente);
 
-            
+            Cliente clienteEditar = PesquisarPorId(idClienteEditar);
+
+            clienteEditar.Nome = clienteEditado.Nome;
+            clienteEditar.Cpf = clienteEditado.Cpf;
+
 
         }
+        
     }
 }
